@@ -64,7 +64,7 @@
 <header>
   <div class="tag">Bannerlator · Feature Status Report</div>
   <h1>LAN Multiplayer over the Internet</h1>
-  <p class="sub">Play LAN-multiplayer Windows games with a friend across the internet — one hosts, one joins with a code. Generated 2026-07-13.</p>
+  <p class="sub">Play LAN-multiplayer Windows games with a friend across the internet — one hosts, one joins with a code. Updated 2026-07-14.</p>
 </header>
 
 <h2><span class="dot"></span>What it is</h2>
@@ -99,6 +99,7 @@ a dedicated relay server            (re-injected as local LAN)</div>
   <div class="comp"><h3>🔑 Room-code signaling</h3><p>Cloudflare Worker endpoints (<code>/lan/host</code>, <code>/lan/join</code>) that mint the 6-char codes and hand out the relay address. Deployed &amp; live.</p></div>
   <div class="comp"><h3>🎛️ App UI</h3><p>Host / Join menus in the app — being polished into a native Compose UI synced across three entry points.</p></div>
   <div class="comp"><h3>🔗 Shared session state</h3><p>One live session, three views onto it (StateFlow). Start hosting anywhere → every menu shows it. Stop anywhere → all update.</p></div>
+  <div class="comp"><h3>🎮 Steam co-op auto-config</h3><p>For Steam co-op games whose multiplayer uses Steam networking: a one-tap toggle auto-points their peer discovery at the overlay, so co-op finds a friend over the internet with zero manual setup. Toggle live &amp; device-proven; end-to-end play pending a second device.</p></div>
 </div>
 
 <h2><span class="dot"></span>Progress</h2>
