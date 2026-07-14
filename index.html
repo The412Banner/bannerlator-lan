@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bannerlator — LAN over Internet</title>
+<style>
+  :root{
+    --bg:#0e1116; --card:#161b22; --card2:#1c232d; --line:#2a323d;
+    --tx:#e6edf3; --dim:#9aa7b4; --accent:#4f9cff; --accent2:#7c5cff;
+    --ok:#3fb950; --run:#d29922; --todo:#6e7681;
+    --okbg:rgba(63,185,80,.14); --runbg:rgba(210,153,34,.16); --todobg:rgba(110,118,129,.16);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:22px 18px 70px}
+  header{padding:26px 22px;border-radius:16px;margin-bottom:22px;
+    background:linear-gradient(135deg,#1b2a4a,#241b3f 60%,#161b22);border:1px solid var(--line)}
+  h1{margin:0 0 6px;font-size:26px;letter-spacing:-.02em}
+  .sub{color:var(--dim);font-size:14.5px;margin:0}
+  .tag{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--accent);background:rgba(79,156,255,.12);
+    border:1px solid rgba(79,156,255,.3);padding:3px 9px;border-radius:99px;margin-bottom:12px}
+  h2{font-size:18.5px;margin:30px 0 12px;letter-spacing:-.01em;
+    display:flex;align-items:center;gap:9px}
+  h2 .dot{width:8px;height:8px;border-radius:99px;background:var(--accent2)}
+  p{margin:0 0 12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin:12px 0}
+  .muted{color:var(--dim)}
+  code{background:var(--card2);border:1px solid var(--line);border-radius:6px;
+    padding:1px 6px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .pipe{background:var(--card2);border:1px solid var(--line);border-radius:12px;
+    padding:16px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12.5px;color:var(--tx);white-space:pre;line-height:1.5}
+  .grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+  .comp{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px}
+  .comp h3{margin:0 0 5px;font-size:15px}
+  .comp p{margin:0;font-size:13.5px;color:var(--dim)}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0}
+  th,td{text-align:left;padding:10px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.03em}
+  td:first-child{white-space:nowrap;font-weight:600}
+  .badge{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
+  .b-ok{color:var(--ok);background:var(--okbg);border:1px solid rgba(63,185,80,.35)}
+  .b-run{color:var(--run);background:var(--runbg);border:1px solid rgba(210,153,34,.4)}
+  .b-todo{color:var(--todo);background:var(--todobg);border:1px solid rgba(110,118,129,.4)}
+  ul{margin:6px 0 12px;padding-left:20px}
+  li{margin:5px 0}
+  .kv{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .kv:last-child{border-bottom:0}
+  .kv span:first-child{color:var(--dim)}
+  .kv span:last-child{font-family:ui-monospace,monospace;text-align:right}
+  .note{border-left:3px solid var(--run);background:var(--runbg);padding:11px 14px;border-radius:0 10px 10px 0;margin:12px 0;font-size:13.5px}
+  .good{border-left:3px solid var(--ok);background:var(--okbg);padding:11px 14px;border-radius:0 10px 10px 0;margin:12px 0;font-size:13.5px}
+  footer{margin-top:34px;color:var(--dim);font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tag">Bannerlator · Feature Status Report</div>
+  <h1>LAN Multiplayer over the Internet</h1>
+  <p class="sub">Play LAN-multiplayer Windows games with a friend across the internet — one hosts, one joins with a code. Generated 2026-07-13.</p>
+</header>
+
+<h2><span class="dot"></span>What it is</h2>
+<div class="card">
+<p>A feature that lets two Bannerlator users play a <strong>LAN-multiplayer game together over the internet</strong>. One player <strong>hosts</strong> and gets a short 6-character code; the other <strong>joins</strong> with it. Both then launch the same game and use its normal <em>LAN / Local Multiplayer</em> menu — and find each other as if they were on the same home router.</p>
+<p class="muted">It is a <strong>network layer, not a multiplayer layer</strong>: the game supplies the multiplayer; we make "LAN" reach across the internet. It works for any game with a LAN / direct-IP mode, and adds <strong>nothing</strong> to the Wine container — no Mono, no Gecko, no winetricks. If a game runs solo in the container, it runs the same with the overlay on.</p>
+</div>
+
+<h2><span class="dot"></span>How it works</h2>
+<div class="card">
+<p>Both phones are placed on one <strong>virtual LAN</strong> (<code>10.99.0.0/24</code> — host <code>.1</code>, client <code>.2</code>). The game's LAN discovery broadcasts and direct connections are captured by a phone-level VPN, tunnelled through a relay to the other player, and re-injected on their side. The game never knows the internet is in between.</p>
+<div class="pipe">Game (inside Wine)  "Host / Join LAN game"
+        │  broadcast + direct-connect
+        ▼
+Wine winsock ─► Android app-UID socket
+        ▼
+Per-app VpnService tun  (scoped to Bannerlator only)
+        ▼
+Native tunnel (liblannet.so): classify + forward
+        │
+        ▼        internet
+   Relay VPS  ───────────────►  friend's phone ─► their game
+a dedicated relay server            (re-injected as local LAN)</div>
+<p class="muted" style="margin-top:12px">Design choice: we built our <strong>own minimal 2-peer overlay</strong> rather than embedding a mesh (ZeroTier/n2n) — no licensing entanglement, full control, and it reuses our existing Cloudflare Worker + account infrastructure.</p>
+</div>
+
+<h2><span class="dot"></span>The pieces</h2>
+<div class="grid">
+  <div class="comp"><h3>📱 Overlay (VpnService)</h3><p>A per-app Android VPN, scoped to Bannerlator only, that captures the game's LAN traffic. Device-proven.</p></div>
+  <div class="comp"><h3>⚙️ Native tunnel (liblannet.so)</h3><p>C library (JNI) that reads the VPN, classifies each packet (broadcast → fan-out, direct → forward), and pumps it to/from the relay.</p></div>
+  <div class="comp"><h3>🛰️ Relay server</h3><p>A tiny UDP forwarder on a free Oracle Cloud VM. Both players connect outbound to it, so it works through any home/mobile NAT. Live now.</p></div>
+  <div class="comp"><h3>🔑 Room-code signaling</h3><p>Cloudflare Worker endpoints (<code>/lan/host</code>, <code>/lan/join</code>) that mint the 6-char codes and hand out the relay address. Deployed &amp; live.</p></div>
+  <div class="comp"><h3>🎛️ App UI</h3><p>Host / Join menus in the app — being polished into a native Compose UI synced across three entry points.</p></div>
+  <div class="comp"><h3>🔗 Shared session state</h3><p>One live session, three views onto it (StateFlow). Start hosting anywhere → every menu shows it. Stop anywhere → all update.</p></div>
+</div>
+
+<h2><span class="dot"></span>Progress</h2>
+<div class="card" style="padding:6px 14px">
+<table>
+<tr><th>Phase</th><th>What</th><th>Status</th></tr>
+<tr><td>P0</td><td>Feasibility — can a phone VPN capture Wine's LAN broadcast?</td><td><span class="badge b-ok">✓ device-proven</span></td></tr>
+<tr><td>P1.1</td><td>Transport backbone (switch + relay + tunnel logic)</td><td><span class="badge b-ok">✓ verified</span></td></tr>
+<tr><td>P1.2</td><td>Scoped VpnService + native JNI tunnel</td><td><span class="badge b-ok">✓ device-proven</span></td></tr>
+<tr><td>P1.3</td><td>Worker room-code signaling (<code>/lan/*</code>)</td><td><span class="badge b-ok">✓ live</span></td></tr>
+<tr><td>P1.4</td><td>Relay VPS (Oracle free tier) — over the real internet</td><td><span class="badge b-ok">✓ live</span></td></tr>
+<tr><td>P1.5</td><td>App engine — UI → worker → live relay</td><td><span class="badge b-ok">✓ device-proven</span></td></tr>
+<tr><td>P1.5-UI</td><td>Polished, synced Compose menu (nav drawer · per-game · in-game)</td><td><span class="badge b-ok">✓ device-verified</span></td></tr>
+<tr><td>P1.5+</td><td>Live connection status ("waiting → connected") + tappable header pill</td><td><span class="badge b-run">◐ in progress</span></td></tr>
+<tr><td>P1.6</td><td><strong>Two devices + a real game</strong> playing together (the exit test)</td><td><span class="badge b-todo">◯ pending</span></td></tr>
+<tr><td>—</td><td>Encryption (Noise) before public launch</td><td><span class="badge b-todo">◯ pending</span></td></tr>
+<tr><td>—</td><td>IPv6 support (for Source-engine / TF2-style games)</td><td><span class="badge b-todo">◯ later</span></td></tr>
+</table>
+</div>
+
+<div class="good"><strong>Proven end-to-end on real hardware:</strong> the polished in-app menu — <em>Host a game</em> → a real 6-character code (with Copy / Share) → overlay up → the live relay logs the phone's connection. All three entry points (nav drawer, per-game long-press, in-game) stay in sync via one shared session — hosting from any surface flips the others to "active". Separately, a broadcast was proven to cross between two peers through the relay over the real internet. Every mechanism the feature relies on now works on-device.</div>
+
+<h2><span class="dot"></span>What's left</h2>
+<div class="card">
+<ul>
+  <li><strong>Polished UI — done &amp; device-verified:</strong> a native Compose menu matching the app's design system, with a big legible/copyable room code, in the nav drawer, per-game long-press menu, and the in-game side menu — all reading from one shared session so they never drift. <em>(Remaining UI follow-ups: surface the host's username in "Hosted by…" on the worker side; and a true "peer connected" signal — today "active" means the tunnel is up, not that the other player has joined.)</em></li>
+  <li><strong>Two-device proof (P1.6) — the finish line:</strong> install a known LAN game on two devices, host on one, join on the other, confirm they find each other and play. This is the true finish line — it needs a second device.</li>
+  <li><strong>Encryption:</strong> the tunnel payload is currently plaintext (fine for testing). A Noise handshake gets added before any public release so the relay only ever sees ciphertext.</li>
+  <li><strong>IPv6 &amp; per-game quirks:</strong> currently IPv4-only; some games (e.g. Source-engine titles) host on IPv6 and would need IPv6 support. A few titles with hardcoded LAN subnets/ports may need small per-game tweaks.</li>
+</ul>
+</div>
+
+<h2><span class="dot"></span>What works, what doesn't</h2>
+<div class="grid">
+  <div class="comp"><h3 style="color:var(--ok)">✓ Works</h3><p>Any game with a <strong>LAN / Local / Direct-IP</strong> mode — the classic LAN-party catalogue (Age of Empires, Warcraft III, older CoD/Halo PC, Stardew/Terraria co-op, Minecraft "Open to LAN", etc.). Both broadcast-discovery and type-in-an-IP styles.</p></div>
+  <div class="comp"><h3 style="color:var(--todo)">✗ Doesn't</h3><p>Single-player-only games; online-only games that need official matchmaking servers and have no LAN mode; titles whose anti-cheat blocks VPN/tunnel interfaces.</p></div>
+</div>
+<p class="muted" style="font-size:13.5px">Rule of thumb: <strong>if two people on the same physical router could play it, this lets them play it over the internet.</strong></p>
+
+<h2><span class="dot"></span>Example games</h2>
+<div class="note">These are <strong>illustrative</strong> — titles that have the right kind of LAN / direct-IP multiplayer this feature targets. Whether any specific one plays comes down to it running in Bannerlator and is confirmed per-game during testing. Not a certified compatibility list (yet).</div>
+<div class="grid">
+  <div class="comp"><h3>⚔️ Real-time strategy</h3><p>Age of Empires II · Warcraft III · StarCraft: Brood War · Command &amp; Conquer (Red Alert 2 / Generals) · Company of Heroes · Rise of Nations · Age of Mythology</p></div>
+  <div class="comp"><h3>🔫 Shooters</h3><p>Counter-Strike 1.6 / Source · Half-Life · Unreal Tournament 2004 · Quake III Arena · Call of Duty 1 / 2 / 4 · Halo: Combat Evolved (PC) · Serious Sam</p></div>
+  <div class="comp"><h3>🌱 Co-op &amp; sandbox</h3><p>Terraria · Stardew Valley · Minecraft ("Open to LAN") · Factorio · Valheim · Don't Starve Together · 7 Days to Die</p></div>
+  <div class="comp"><h3>🕹️ Classics</h3><p>Diablo II (TCP/IP) · Worms Armageddon · Trackmania Nations · Duke Nukem 3D · Quake / Doom source ports</p></div>
+</div>
+
+<h2><span class="dot"></span>Key facts</h2>
+<div class="card">
+  <div class="kv"><span>App</span><span>com.winlator.banner (Bannerlator)</span></div>
+  <div class="kv"><span>Overlay approach</span><span>own 2-peer virtual LAN</span></div>
+  <div class="kv"><span>Virtual subnet</span><span>10.99.0.0/24 · host .1 / client .2</span></div>
+  <div class="kv"><span>Relay</span><span>Oracle free-tier VM · UDP relay</span></div>
+  <div class="kv"><span>Signaling</span><span>Cloudflare Worker · /lan/host · /lan/join</span></div>
+  <div class="kv"><span>Account required</span><span>no — anonymous; optional username if signed in</span></div>
+  <div class="kv"><span>Container deps added</span><span>none (no Mono / Gecko / winetricks)</span></div>
+  <div class="kv"><span>Cost</span><span>$0 (free-tier relay)</span></div>
+</div>
+
+<footer>Bannerlator — LAN-over-internet · engineering status report · 2026-07-13</footer>
+</div>
+</body>
+</html>
