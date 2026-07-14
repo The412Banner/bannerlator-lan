@@ -91,6 +91,13 @@ a dedicated relay server            (re-injected as local LAN)</div>
 <p class="muted" style="margin-top:12px">Design choice: we built our <strong>own minimal 2-peer overlay</strong> rather than embedding a mesh (ZeroTier/n2n) — no licensing entanglement, full control, and it reuses our existing Cloudflare Worker + account infrastructure.</p>
 </div>
 
+<h2><span class="dot"></span>How different games connect</h2>
+<div class="card"><p>Games do "LAN multiplayer" two different ways, and the overlay handles both:</p></div>
+<div class="grid">
+  <div class="comp"><h3>🎮 Games with their own LAN / direct-IP</h3><p>Most classic LAN titles — FlatOut 2, Age of Empires, Warcraft III, Source-engine games — find peers by broadcasting on the local network or let you type in an IP. The overlay carries that native traffic directly: broadcasts are fanned out to your friend, and a direct connect to the peer's overlay address (<code>10.99.0.1</code>) is forwarded as-is. Nothing to configure — open the game's LAN/Multiplayer menu, or use its "connect to IP" option pointed at <code>10.99.0.1</code>. (Note: some games' hosts stay silent until the <em>joining</em> player's game sends the discovery query — that's the game's design, not the overlay.)</p></div>
+  <div class="comp"><h3>🕹️ Steam co-op games</h3><p>Games whose multiplayer runs on <strong>Steam networking</strong> (Steam lobbies / P2P) don't broadcast the same way. For these, when the game is running under the app's <strong>Steam-compatibility patch</strong>, a one-tap <em>Steam co-op</em> toggle auto-configures the game to send its peer discovery straight down the overlay as a direct connection — no manual setup. Only helps games that genuinely use Steam networking for multiplayer (compatibility-patched ≠ guaranteed).</p></div>
+</div>
+
 <h2><span class="dot"></span>The pieces</h2>
 <div class="grid">
   <div class="comp"><h3>📱 Overlay (VpnService)</h3><p>A per-app Android VPN, scoped to Bannerlator only, that captures the game's LAN traffic. Device-proven.</p></div>
