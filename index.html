@@ -156,6 +156,16 @@ a dedicated relay server            (re-injected as local LAN)</div>
   <div class="comp"><h3>🕹️ Classics</h3><p>Diablo II (TCP/IP) · Worms Armageddon · Trackmania Nations · Duke Nukem 3D · Quake / Doom source ports</p></div>
 </div>
 
+<h2><span class="dot"></span>Common questions</h2>
+<div class="card">
+  <p><strong>Q: Do we each install a separate VPN app and pick the same server?</strong></p>
+  <p class="muted">No. The overlay is <strong>built into Bannerlator</strong> — no second app to install, no server list to choose. One person taps <em>Host</em> and gets a 6-character code; the other taps <em>Join</em> and enters it. That code <em>is</em> the pairing — it points both apps at the same relay + room automatically. You never pick a server.</p>
+  <p style="margin-top:14px"><strong>Q: Our internet IPs are different — won't that break it?</strong></p>
+  <p class="muted">No, that's expected and fine. Your real IPs stay different (and private). Inside the overlay you're both handed <strong>fixed virtual-LAN addresses</strong>: host is always <code>10.99.0.1</code>, joiner always <code>10.99.0.2</code>. To the games you look like two PCs on the same home router, wherever you each are.</p>
+  <p style="margin-top:14px"><strong>Q: Do I need the Steam-compatibility patch for LAN to work?</strong></p>
+  <p class="muted">Only for some games. The Steam-compatibility patch + <em>Steam co-op</em> toggle matters when a game's multiplayer runs on <strong>Steam networking</strong>. Many LAN games (e.g. FlatOut 2) use their <strong>own</strong> LAN system instead — those work through the overlay directly, with no patch involved. The compatibility patch is only about a game <em>booting</em> without a live Steam client; it's separate from how the game does multiplayer.</p>
+</div>
+
 <h2><span class="dot"></span>Key facts</h2>
 <div class="card">
   <div class="kv"><span>App</span><span>com.winlator.banner (Bannerlator)</span></div>
