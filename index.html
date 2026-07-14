@@ -107,7 +107,7 @@ a dedicated relay server            (re-injected as local LAN)</div>
   <div class="comp"><h3>🎛️ App UI</h3><p>Host / Join menus in the app — being polished into a native Compose UI synced across three entry points.</p></div>
   <div class="comp"><h3>🔗 Shared session state</h3><p>One live session, three views onto it (StateFlow). Start hosting anywhere → every menu shows it. Stop anywhere → all update.</p></div>
   <div class="comp"><h3>🎮 Steam co-op auto-config</h3><p>For Steam co-op games whose multiplayer uses Steam networking: a one-tap toggle auto-points their peer discovery at the overlay, so co-op finds a friend over the internet with zero manual setup. Toggle live &amp; device-proven; end-to-end play pending a second device.</p></div>
-  <div class="comp"><h3>💬 In-game chat</h3><p>A floating, draggable, semi-transparent chat window that sits over the running game (minimize / close) so both players can talk <em>without leaving the game</em> — leaving to use another app can drop the connection. Near-instant, and it works before, during, and even after a hiccup. Built; on-device testing next.</p></div>
+  <div class="comp"><h3>💬 In-game chat</h3><p>A floating, draggable, resizable, semi-transparent chat window over the running game — minimize to a bubble, and your controller keeps driving the game while it's open. Names on each side, live "typing…" dots, near-instant. <strong>Device-proven, single and two-device</strong>: two players on different networks had a live back-and-forth mid-session. It's also the coordination channel that keeps you from having to leave the app (which is what drops the connection).</p></div>
 </div>
 
 <h2><span class="dot"></span>Progress</h2>
@@ -123,13 +123,14 @@ a dedicated relay server            (re-injected as local LAN)</div>
 <tr><td>P1.5-UI</td><td>Polished, synced Compose menu (nav drawer · per-game · in-game)</td><td><span class="badge b-ok">✓ device-verified</span></td></tr>
 <tr><td>P1.5+</td><td>Live connection status ("waiting → connected") + tappable header pill</td><td><span class="badge b-ok">✓ device-verified</span></td></tr>
 <tr><td>P1.6</td><td><strong>Two devices, two networks</strong> — paired over the internet; connection + "player connected" + broadcast crossing all proven live. Full 2-player match still to finish.</td><td><span class="badge b-run">◑ in progress</span></td></tr>
-<tr><td>Chat</td><td>In-game floating chat window — talk without leaving the game</td><td><span class="badge b-run">◑ built · testing</span></td></tr>
+<tr><td>Chat</td><td>In-game floating chat window (draggable/resizable, controller-friendly, typing dots)</td><td><span class="badge b-ok">✓ two-device proven</span></td></tr>
+<tr><td>Uptime</td><td>Keep the session alive in the background (foreground service + self-healing relay)</td><td><span class="badge b-ok">✓ hardened</span></td></tr>
 <tr><td>—</td><td>Encryption (Noise) before public launch</td><td><span class="badge b-todo">◯ pending</span></td></tr>
 <tr><td>—</td><td>IPv6 support (for Source-engine / TF2-style games)</td><td><span class="badge b-todo">◯ later</span></td></tr>
 </table>
 </div>
 
-<div class="good"><strong>Proven end-to-end on real hardware:</strong> the polished in-app menu — <em>Host a game</em> → a real 6-character code (with Copy / Share) → overlay up → the live relay logs the phone's connection. All three entry points (nav drawer, per-game long-press, in-game) stay in sync via one shared session — hosting from any surface flips the others to "active". Separately, a broadcast was proven to cross between two peers through the relay over the real internet. And in a first live <strong>two-device test, two phones on completely different networks paired over the internet</strong> — the app showed "player connected" and the host's LAN broadcast crossed the overlay to the other side — proving the whole connection layer with real remote hardware. Completing an actual in-game match is the remaining step.</div>
+<div class="good"><strong>Proven end-to-end on real hardware:</strong> the polished in-app menu — <em>Host a game</em> → a real 6-character code (with Copy / Share) → overlay up → the live relay logs the phone's connection. All three entry points (nav drawer, per-game long-press, in-game) stay in sync via one shared session — hosting from any surface flips the others to "active". Separately, a broadcast was proven to cross between two peers through the relay over the real internet. And in a first live <strong>two-device test, two phones on completely different networks paired over the internet</strong> — the app showed "player connected" and the host's LAN broadcast crossed the overlay to the other side — proving the whole connection layer with real remote hardware. On top of that, the <strong>in-game chat is fully proven both ways</strong> — two players on different networks held a live typing conversation over the running game — and a new background mode keeps sessions from dropping when you switch apps. Completing an actual in-game match is the remaining step.</div>
 
 <h2><span class="dot"></span>What's left</h2>
 <div class="card">
